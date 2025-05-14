@@ -172,7 +172,7 @@ elif opcion ==  "📊 Muestreo":
 
                     datos = pd.DataFrame()
 
-                    if notificador == "UTMDL":
+                    if notificador == "UTMDL" or notificador == "GESTAR INNOVACION":
                         df_notificador['EMPRESA'] = df_notificador['EMPRESA'].astype(str).str.lower()
                         pattern_fiscalia = r'\b[fph][iy1]sc[aá]l[il1y][aáe]?\b'
 
@@ -180,7 +180,7 @@ elif opcion ==  "📊 Muestreo":
                         df_otros = df_notificador[~df_notificador['EMPRESA'].str.contains(pattern_fiscalia, na=False, regex=True)]
 
                         if not df_fiscalia.empty:
-                            st.info("👮‍♀️ Se encontraron registros de Fiscalía para el notificador UTMDL. Se tomará una muestra con 25% Fiscalía y 75% otras empresas.")
+                            st.info("👮‍♀️ Se encontraron registros de Fiscalía. Se tomará una muestra con 25% Fiscalía y 75% otras empresas.")
                         else:
                             st.warning("⚠️ No se encontraron registros de Fiscalía para UTMDL. Se tomará el 100% de la muestra desde otras empresas.")
 
