@@ -182,11 +182,12 @@ elif opcion ==  "📊 Muestreo":
                         if not df_fiscalia.empty:
                             st.info("👮‍♀️ Se encontraron registros de Fiscalía. Se tomará una muestra con 25% Fiscalía y 75% otras empresas.")
                         else:
-                            st.warning("⚠️ No se encontraron registros de Fiscalía para UTMDL. Se tomará el 100% de la muestra desde otras empresas.")
+                            st.warning("⚠️ No se encontraron registros de Fiscalía para los notificadores. Se tomará el 100% de la muestra desde otras empresas.")
 
                         n_fisc = max(1, math.ceil(n * 0.25)) if len(df_fiscalia) > 0 else 0
                         n_otros = n - n_fisc
-
+                        n_fisc = min(n_fisc, len(df_fiscalia))
+                        n_otros = min(n_otros, len(df_otros))
                         datos_fisc = df_fiscalia.sample(n=n_fisc, random_state=42) if n_fisc > 0 else pd.DataFrame()
                         datos_otros = df_otros.sample(n=n_otros, random_state=42) if n_otros > 0 else pd.DataFrame()
                         datos = pd.concat([datos_fisc, datos_otros])
